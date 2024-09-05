@@ -1,18 +1,15 @@
-/**
- * @title Daily Standup
- * @resource {https://campsite.com/docs} Campsite docs
- * @description Creates a daily standup post on Campsite.
- */
+import "dotenv/config";
+import cron from "node-cron";
 
 // Monday-Friday at 9:30 PM UTC
 const SCHEDULE = "30 21 * * 1-5";
 
 const MEMBERS = [
-	"3her0vv6fb75", // Brian,
-	"mqssgn0wm7so", // Ryan,
-	"ntodpqcg879d", // Nick,
-	"zwvznmxcpiel", // Dan,
-	"el8fwvr2jttt", // Alexandru,
+	"3hsr0vv6fb75", // Brian,
+	"mqasgn0wm7so", // Ryan,
+	"ntpdpqcg879d", // Nick,
+	"znvznmxcpiel", // Dan,
+	"et8fwvr2jttt", // Alexandru,
 ];
 
 const MENTIONS = MEMBERS.map((id) => `<@${id}>`).join(" ");
@@ -21,7 +18,7 @@ const CONTENT = `What did you work on today?\n\n${MENTIONS}`;
 
 const DAILY_UPDATES_PROJECT_ID = "0l96cxq9jb83";
 
-Deno.cron("Daily Standup", SCHEDULE, async () => {
+cron.schedule(SCHEDULE, async () => {
 	const title = new Date().toLocaleDateString("en-US", {
 		month: "long",
 		day: "numeric",
@@ -38,7 +35,7 @@ Deno.cron("Daily Standup", SCHEDULE, async () => {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${Deno.env.get("CAMPSITE_API_KEY")}`,
+			Authorization: `Bearer ${process.env.CAMPSITE_API_KEY}`,
 		},
 		body: JSON.stringify(body),
 	});
