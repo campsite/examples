@@ -3,5 +3,6 @@
 	"editor.defaultFormatter": "denoland.vscode-deno",
 	"editor.formatOnSave": true,
 	"editor.formatOnPaste": false,
-	"editor.detectIndentation": true
+	"editor.detectIndentation": true,
+	"typescript.tsserver.experimental.enableProjectDiagnostics": false
 }

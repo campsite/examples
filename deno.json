@@ -1,5 +1,5 @@
 {
 	"tasks": {
-		"run": "deno run --env -A"
+		"run": "deno run --env -A --unstable-sloppy-imports"
 	}
 }
