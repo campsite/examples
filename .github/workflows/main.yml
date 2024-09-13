@@ -11,7 +11,7 @@ jobs:
         with:
           api_key: ${{ secrets.CAMPBOT_API_KEY }}
           action_type: create_post
-          channel_id: doibjg709rkv # "Github Alerts" in personal FF org
+          channel_id: 050d8hh4a1dx # "Integrations testing" channel
           title: "Hello from GitHub Actions"
           content: "This is a *test post*"
       - name: Get the output URL
