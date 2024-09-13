@@ -7,12 +7,12 @@ jobs:
     steps:
       - name: Create Campsite post
         id: campsite
-        uses: campsite/campsite-github-action@v1.0.0
+        uses: campsite/campsite-github-action@v0.1.0
         with:
-          campsite-api-key: ${{ secrets.CAMPSITE_TOKEN }}
-          action-type: post
-          channel-id: ${{ secrets.CAMPSITE_CHANNEL_ID }}
+          api_key: ${{ secrets.CAMPBOT_API_KEY }}
+          action_type: create_post
+          channel_id: doibjg709rkv # "Github Alerts" in personal FF org
           title: "Hello from GitHub Actions"
           content: "This is a *test post*"
       - name: Get the output URL
-        run: echo "The URL is ${{ steps.campsite.outputs.post_url }}"
+        run: echo "The post URL is ${{ steps.campsite.outputs.post_url }}"
