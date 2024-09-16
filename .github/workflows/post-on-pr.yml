@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Get PR details
         id: pr_details
@@ -25,7 +27,7 @@ jobs:
       - name: Get commit details
         id: commit_details
         run: |
-          COMMITS=$(git log --pretty=format:"%s (#%h) (%H)" ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
+          COMMITS=$(git log --pretty=format:"%s (#%h) (%H)" origin/${{ github.event.pull_request.base.ref }}..origin/${{ github.event.pull_request.head.ref }})
           echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
           echo "$COMMITS" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
