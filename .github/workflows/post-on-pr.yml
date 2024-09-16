@@ -1,0 +1,51 @@
+name: Create Campsite Post on PR
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - main
+  push:
+
+jobs:
+  create-campsite-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get PR details
+        id: pr_details
+        run: |
+          echo "PR_TITLE=$(echo '${{ github.event.pull_request.title }}' | sed 's/"/\\"/g')" >> $GITHUB_OUTPUT
+          echo "PR_URL=${{ github.event.pull_request.html_url }}" >> $GITHUB_OUTPUT
+          echo "TARGET_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          echo "TIMESTAMP=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
+
+      - name: Get commit details
+        id: commit_details
+        run: |
+          COMMITS=$(git log --pretty=format:"%s (#%h) (%H)" origin/${{ github.event.pull_request.base.ref }}..origin/${{ github.event.pull_request.head.ref }})
+          echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Get contributors
+        id: contributors
+        run: |
+          CONTRIBUTORS=$(git log --pretty=format:"%an" origin/${{ github.event.pull_request.base.ref }}..origin/${{ github.event.pull_request.head.ref }} | sort -u | sed 's/^/@/' | tr '\n' ' ')
+          echo "CONTRIBUTORS=$CONTRIBUTORS" >> $GITHUB_OUTPUT
+
+      - name: Create Campsite post
+        uses: campsite/campsite-github-action@v1
+        with:
+          api_key: ${{ secrets.CAMPSITE_API_KEY_TEST }}
+          action_type: create_post
+          channel_id: doibjg709rkv
+          title: "New Release: Release ${{ steps.pr_details.outputs.TIMESTAMP }}"
+          content: |
+            A new pull request has been opened targeting `${{ steps.pr_details.outputs.TARGET_BRANCH }}`. [View on GitHub ->](${{ steps.pr_details.outputs.PR_URL }})
+            ## Commits in this PR:
+            ${{ steps.commit_details.outputs.COMMITS }}
+            ## Contributors:
+            ${{ steps.contributors.outputs.CONTRIBUTORS }}
