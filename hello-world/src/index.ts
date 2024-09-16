@@ -1,16 +1,16 @@
 import "dotenv/config";
 
 const CONTENT = `This post was created with the Campsite API.`;
-const PROJECT_ID = "<YOUR_PROJECT_ID>";
+const CHANNEL_ID = "<YOUR_CHANNEL_ID>";
 
 (async () => {
 	const body = {
 		title: "Hello World",
 		content_markdown: CONTENT,
-		project_id: PROJECT_ID,
+		channel_id: CHANNEL_ID,
 	};
 
-	const response = await fetch("https://api.campsite.co/v2/posts", {
+	const response = await fetch("https://api.campsite.com/v2/posts", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

@@ -16,7 +16,7 @@ const MENTIONS = MEMBERS.map((id) => `<@${id}>`).join(" ");
 
 const CONTENT = `What did you work on today?\n\n${MENTIONS}`;
 
-const DAILY_UPDATES_PROJECT_ID = "0l96cxq9jb83";
+const DAILY_UPDATES_CHANNEL_ID = "<YOUR_CHANNEL_ID>";
 
 cron.schedule(SCHEDULE, async () => {
 	const title = new Date().toLocaleDateString("en-US", {
@@ -28,10 +28,10 @@ cron.schedule(SCHEDULE, async () => {
 	const body = {
 		title,
 		content_markdown: CONTENT,
-		project_id: DAILY_UPDATES_PROJECT_ID,
+		channel_id: DAILY_UPDATES_CHANNEL_ID,
 	};
 
-	const response = await fetch("https://api.campsite.co/v2/posts", {
+	const response = await fetch("https://api.campsite.com/v2/posts", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
