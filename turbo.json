@@ -1,11 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "lint": {
-      "outputs": []
-    },
-    "lint:fix": {
-      "outputs": []
+    "format": {
+      "outputs": [],
+      "cache": false
     },
     "clean": {
       "cache": false

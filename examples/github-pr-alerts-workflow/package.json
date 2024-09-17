@@ -1,0 +1,8 @@
+{
+  "name": "github-pr-alerts-workflow",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --write \"**/*.{ts,md,yml,json}\""
+  }
+}
