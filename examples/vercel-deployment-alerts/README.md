@@ -14,3 +14,5 @@ VERCEL_WEBHOOK_SECRET=<YOUR_WEBHOOK_SECRET>
 ```
 
 _This code is provided as an example and is not intended to be deployed as-is. Adapt the code in `src/index.ts` to fit your use case and deployment environment._
+
+_Thanks to [@andrerfneves](https://github.com/andrerfneves) for the original implementation of this workflow._
