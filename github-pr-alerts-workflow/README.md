@@ -1,6 +1,6 @@
 # GitHub PR Alerts Workflow
 
-This workflow creates a post in Campsite when a pull request is opened, closed, or merged.
+This workflow creates a chat message in Campsite when a pull request is opened, closed, or merged.
 
 ### Prerequisites
 

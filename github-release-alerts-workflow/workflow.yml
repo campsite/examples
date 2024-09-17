@@ -1,0 +1,64 @@
+name: "🏕️ Campsite"
+
+on:
+  pull_request:
+    types: [opened]
+    branches: ["main"]
+
+jobs:
+  notify-campsite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh
+
+      - name: Get PR commits and authors
+        id: get-pr-info
+        run: |
+          COMMITS=$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '.commits[] | "- " + (.messageHeadline | sub("\\n.*"; "")) + " ([" + (.oid | .[0:7]) + "](" + .url + "))"' | jq -Rs .)
+          echo "commits=$COMMITS" >> $GITHUB_OUTPUT
+
+          AUTHORS=$(gh pr view ${{ github.event.pull_request.number }} --json commits --jq '[.commits[].authors[].login] | unique | join(" ")' | tr '[:lower:]' '[:upper:]')
+
+          MENTIONS=""
+          for author in $authors; do
+            case $author in
+              GH_USERNAME_1) MENTIONS="$MENTIONS <@CAMPSITE_USERNAME_1>";;
+              GH_USERNAME_2) MENTIONS="$MENTIONS <@CAMPSITE_USERNAME_2>";;
+            esac
+          done
+
+          echo "mentions=$MENTIONS" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Format contributors
+        id: format-contributors
+        run: |
+          MENTIONS="${{ steps.get-pr-info.outputs.mentions }}"
+          FORMATTED_MENTIONS=$(echo "$MENTIONS" | tr ' ' '\n' | sed '/^$/d; s/^/- /')
+
+          echo "formatted_mentions<<EOF" >> $GITHUB_OUTPUT
+          echo "$FORMATTED_MENTIONS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Campsite Post
+        uses: campsite/campsite-github-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CAMPSITE_API_KEY }}
+          action_type: create_post
+          title: "New Release: ${{ github.event.pull_request.title }}"
+          content: |
+            A new pull request has been opened targeting `${{ github.base_ref }}`. [View on GitHub →](${{ github.event.pull_request.html_url }})
+            ## Commits in this PR:
+            ${{ fromJson(steps.get-pr-info.outputs.commits) }}
+            ## Contributors:
+            ${{ steps.format-contributors.outputs.formatted_mentions }}
+          channel_id: ${{ secrets.CAMPSITE_RELEASES_CHANNEL_ID }}
