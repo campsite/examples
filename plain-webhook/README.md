@@ -17,3 +17,9 @@ OPENAI_API_KEY=<YOUR_API_KEY>
 ```
 
 _This code is provided as an example and is not intended to be deployed as-is. Adapt the code in `src/index.ts` to fit your use case and deployment environment._
+
+### How we use it
+
+We use this internally to cross-post support channel updates to a "Plain" channel in Campsite. Each thread gets a new post with an AI-generated title, keeping discussions organized and easy to identify. Replies are added to the thread as comments, and we also use the comments to discuss support issues and feature requests internally.
+
+![image](https://github.com/user-attachments/assets/a6cb82fe-62d4-4c87-a56d-1c51d58746b3)
