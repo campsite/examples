@@ -1,0 +1,11 @@
+packages:
+  - "!**/node_modules"
+catalog:
+  "@ianvs/prettier-plugin-sort-imports": ^4.2.1
+  "@types/node": ^20.16.5
+  dotenv: ^16.4.5
+  prettier-plugin-packagejson: ^2.4.14
+  prettier: ^3.2.5
+  ts-node: ^10.9.2
+  ts-node-dev: ^2.0.0
+  typescript: ^5.5.4

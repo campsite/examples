@@ -3,15 +3,16 @@
 	"version": "1.0.0",
 	"scripts": {
 		"start": "ts-node src/index.ts",
-		"watch": "ts-node-dev --respawn --transpile-only src/index.ts"
+		"watch": "ts-node-dev --respawn --transpile-only src/index.ts",
+		"clean": "rm -rf .turbo node_modules"
 	},
 	"devDependencies": {
-		"@types/node": "^20.16.5",
-		"ts-node": "^10.9.2",
-		"ts-node-dev": "^2.0.0",
-		"typescript": "^5.5.4"
+		"@types/node": "catalog:",
+		"ts-node": "catalog:",
+		"ts-node-dev": "catalog:",
+		"typescript": "catalog:"
 	},
 	"dependencies": {
-		"dotenv": "^16.4.5"
+		"dotenv": "catalog:"
 	}
 }

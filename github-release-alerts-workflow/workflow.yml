@@ -1,9 +1,9 @@
-name: "🏕️ Campsite"
+name: '🏕️ Campsite'
 
 on:
   pull_request:
     types: [opened]
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   notify-campsite:
@@ -54,7 +54,7 @@ jobs:
         with:
           api_key: ${{ secrets.CAMPSITE_API_KEY }}
           action_type: create_post
-          title: "New Release: ${{ github.event.pull_request.title }}"
+          title: 'New Release: ${{ github.event.pull_request.title }}'
           content: |
             A new pull request has been opened targeting `${{ github.base_ref }}`. [View on GitHub →](${{ github.event.pull_request.html_url }})
             ## Commits in this PR:

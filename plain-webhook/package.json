@@ -1,16 +1,19 @@
 {
 	"name": "plain-webhook",
 	"version": "1.0.0",
+	"scripts": {
+		"clean": "rm -rf .turbo node_modules"
+	},
 	"devDependencies": {
-		"@types/node": "^20.16.5",
-		"ts-node": "^10.9.2",
-		"ts-node-dev": "^2.0.0",
-		"typescript": "^5.5.4"
+		"@types/node": "catalog:",
+		"ts-node": "catalog:",
+		"ts-node-dev": "catalog:",
+		"typescript": "catalog:"
 	},
 	"dependencies": {
 		"@ai-sdk/openai": "^0.0.60",
 		"@team-plain/typescript-sdk": "^4.8.0",
 		"ai": "^3.3.39",
-		"dotenv": "^16.4.5"
+		"dotenv": "catalog:"
 	}
 }
