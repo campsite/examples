@@ -1,16 +1,9 @@
 # 🏕️ Campsite API examples
 
-This repository contains a variety of code examples that illustrate how to leverage the [Campsite API](https://campsite.com/docs), demonstrating various workflows and serving as a helpful starting point for your own custom integrations.
+This repository contains various code samples that demonstrate how to leverage the [Campsite API](https://campsite.com/docs) to connect external services to your Campsite workspace.
 
-## About these examples
-
-These examples are designed to illustrate key concepts and common use cases when working with the Campsite API. While they're not intended to be run as-is, they serve as valuable references that you can adapt and build upon for your specific needs.
-
-## What you'll find here
-
-- **Code snippets**: Concise, focused examples of API interactions
-- **Integration patterns**: Common patterns for effectively using the Campsite API
-- **Best practices**: Recommendations for effective integrations
+> [!TIP]
+> These examples are designed to illustrate key concepts and common use cases when working with the Campsite API. While they're not intended to be run as-is, we invite you to use them as a starting point for your own custom integrations.
 
 ## Contributing
 
