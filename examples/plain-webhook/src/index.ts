@@ -173,7 +173,7 @@ export default async function (req: Request) {
 
       const contentParts = [
         `**Reply from ${thread.customer.fullName} (${thread.customer.email.email}):**`,
-        email.markdownContent,
+        email.markdownContent || email.textContent || '*No content*',
         viewThreadLink(webhookBody.workspaceId, thread.id)
       ]
 
@@ -195,7 +195,7 @@ export default async function (req: Request) {
     if (postId) {
       const contentParts = [
         `**${email.from.name} replied:**`,
-        email.markdownContent,
+        email.markdownContent || email.textContent || '*No content*',
         viewThreadLink(webhookBody.workspaceId, thread.id)
       ]
 
