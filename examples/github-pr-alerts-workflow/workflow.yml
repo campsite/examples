@@ -35,6 +35,8 @@ jobs:
             ACTION="ready for review"
           elif [[ "${ACTION}" == "reopened" ]]; then
             ACTION="reopened"
+          elif [[ "${ACTION}" == "closed" && "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            ACTION="merged"
           fi
 
           ESCAPED_TITLE=$(echo '${{ github.event.pull_request.title }}' | jq -rRs '.')
