@@ -39,7 +39,7 @@ jobs:
             ACTION="merged"
           fi
 
-          ESCAPED_TITLE=$(echo '${{ github.event.pull_request.title }}' | jq -rRs '.')
+          ESCAPED_TITLE=$(echo "${{ github.event.pull_request.title }}" | jq -Rr @json)
 
           CONTENT="${STATUS_EMOJI} Pull request ${ACTION} by ${{ github.event.pull_request.user.login }}: [#${{ github.event.pull_request.number }} ${ESCAPED_TITLE}](${{ github.event.pull_request.html_url }})"
 
